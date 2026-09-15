@@ -194,3 +194,14 @@ contactForm.addEventListener('submit', (event) => {
     contactForm.reset();
   }
 });
+nameInput.addEventListener('input', () => {
+  clearError(nameInput, nameError);
+});
+
+emailInput.addEventListener('input', () => {
+  clearError(emailInput, emailError);
+});
+
+messageInput.addEventListener('input', () => {
+  clearError(messageInput, messageError);
+});

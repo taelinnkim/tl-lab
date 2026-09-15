@@ -153,11 +153,17 @@ https://taelinnkim.github.io/tl-lab/
 
 ## Screenshots
 
-추후 아래 스크린샷을 추가할 예정입니다.
+### Desktop
 
-- Desktop
-- Mobile
-- Dark Mode
+![TL LAB Desktop](images/screenshots/desktop.png)
+
+### Mobile
+
+![TL LAB Mobile](images/screenshots/mobile.png)
+
+### Dark Mode
+
+![TL LAB Dark Mode](images/screenshots/dark-mode.png)
 
 ---
 
