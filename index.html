@@ -150,36 +150,3 @@
 
 </body>
 </html>
-
-.menu-toggle {
-  display: none;
-  font-size: 1.5rem;
-  background: none;
-  color: var(--text-color);
-}
-
-@media (max-width: 767px) {
-  nav {
-    position: relative;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  nav ul {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    padding: 1rem 1.5rem;
-    background-color: var(--bg-color);
-    border-bottom: 1px solid #ddd;
-  }
-
-  nav ul.active {
-    display: flex;
-  }
-}
