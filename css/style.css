@@ -108,6 +108,42 @@ article {
   margin-bottom: 1rem;
 }
 
+article {
+  background-color: var(--card-color);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+#projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.project-card {
+  background-color: var(--card-color);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.project-card h3 {
+  margin-top: 0;
+}
+
+.project-card a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -125,6 +161,31 @@ textarea {
 
 textarea {
   min-height: 140px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.error-message {
+  min-height: 1.2rem;
+  margin: 0;
+  font-size: 0.85rem;
+  color: #b3261e;
+}
+
+.success-message {
+  min-height: 1.5rem;
+  margin-top: 0.5rem;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+input.error,
+textarea.error {
+  border-color: #b3261e;
 }
 
 button {
