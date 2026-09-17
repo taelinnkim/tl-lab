@@ -77,8 +77,30 @@ revealElements.forEach((element) => {
 const projectsGrid = document.querySelector('#projects-grid');
 const projectsStatus = document.querySelector('#projects-status');
 const retryButton = document.querySelector('#retry-button');
+const projectSearch = document.querySelector('#project-search');
+
+const STATE = {
+  repositories: [],
+  projectQuery: ''
+};
+
 
 const GITHUB_USERNAME = 'taelinnkim';
+
+const getFilteredRepositories = () => {
+  const query = STATE.projectQuery.trim().toLowerCase();
+
+  if (query === '') {
+    return STATE.repositories;
+  }
+
+  return STATE.repositories.filter((repository) => {
+    const name = repository.name.toLowerCase();
+    const description = (repository.description || '').toLowerCase();
+
+    return name.includes(query) || description.includes(query);
+  });
+};
 
 const fetchGitHubProjects = async () => {
   projectsStatus.textContent = '프로젝트를 불러오는 중...';
@@ -95,6 +117,8 @@ const fetchGitHubProjects = async () => {
     }
 
     const repositories = await response.json();
+
+    STATE.repositories = repositories;
 
     if (repositories.length === 0) {
       projectsStatus.textContent = '표시할 프로젝트가 없습니다.';
@@ -130,6 +154,29 @@ const fetchGitHubProjects = async () => {
     retryButton.hidden = false;
   }
 };
+
+projectSearch.addEventListener('input', (event) => {
+  STATE.projectQuery = event.target.value;
+
+  const filteredRepositories = getFilteredRepositories();
+  const visibleProjectNames = filteredRepositories.map(
+    (repository) => repository.name
+  );
+
+  const projectCards = document.querySelectorAll('.project-card');
+
+  projectCards.forEach((card) => {
+    const projectName = card.querySelector('h3').textContent;
+
+    card.hidden = !visibleProjectNames.includes(projectName);
+  });
+
+  if (filteredRepositories.length === 0) {
+    projectsStatus.textContent = '검색 결과가 없습니다.';
+  } else {
+    projectsStatus.textContent = '';
+  }
+});
 
 retryButton.addEventListener('click', fetchGitHubProjects);
 

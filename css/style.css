@@ -178,6 +178,27 @@ article {
   margin-top: 2rem;
 }
 
+.project-search {
+  margin: 1.5rem 0;
+}
+
+.project-search label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.project-search input {
+  width: 100%;
+  max-width: 420px;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: var(--card-color);
+  color: var(--text-color);
+  font: inherit;
+}
+
 .project-card {
   background-color: var(--card-color);
   padding: 1.5rem;

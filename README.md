@@ -54,6 +54,9 @@ Endpoint: `https://api.github.com/users/taelinnkim/repos`
 
 GitHub 데이터를 `map()`으로 HTML 카드로 변환하여 Projects 영역에 렌더링합니다.
 
+프로젝트 검색 기능은 `Array.filter()`를 사용하여
+프로젝트 이름과 설명을 기준으로 목록을 필터링합니다.
+
 ### Contact Form
 
 - 이름, 이메일, 메시지 입력
@@ -124,6 +127,8 @@ TL LAB은 앞으로 다음 작업을 아카이빙하는 개인 연구·창작 �
 
 외부 프레임워크 없이 Vanilla HTML / CSS / JavaScript로 구현했습니다.
 
+프로젝트의 주요 상태는 `STATE` 객체에서 관리합니다.
+
 ---
 
 ## JavaScript Concepts
@@ -145,6 +150,7 @@ TL LAB은 앞으로 다음 작업을 아카이빙하는 개인 연구·창작 �
 - `try / catch`
 - `map()`
 - `forEach()`
+- `filter()`
 - 화살표 함수
 - 구조분해 할당
 - 템플릿 리터럴
@@ -186,6 +192,13 @@ API 요청
 → 현재 스크롤 위치 확인  
 → 클래스 상태 변경  
 → Header / Scroll Top 버튼 UI 변경
+
+### Project Search
+
+사용자 검색어 입력  
+→ `STATE.projectQuery` 변경  
+→ `STATE.repositories.filter()` 실행  
+→ 조건에 맞는 프로젝트만 화면에 표시
 
 ---
 
