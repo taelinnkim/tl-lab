@@ -8,11 +8,15 @@ const themeToggle = document.querySelector('.theme-toggle');
 
 const savedTheme = localStorage.getItem('theme');
 
-if (savedTheme) {
-  document.documentElement.setAttribute('data-theme', savedTheme);
+const systemPrefersDark = window.matchMedia(
+  '(prefers-color-scheme: dark)'
+).matches;
 
-  themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-}
+const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+
+document.documentElement.setAttribute('data-theme', initialTheme);
+
+themeToggle.textContent = initialTheme === 'dark' ? '☀️' : '🌙';
 
 themeToggle.addEventListener('click', () => {
   const currentTheme =
@@ -158,7 +162,7 @@ const isValidEmail = (email) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
 
-contactForm.addEventListener('submit', (event) => {
+contactForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   let isValid = true;
@@ -176,24 +180,57 @@ contactForm.addEventListener('submit', (event) => {
     showError(emailInput, emailError, '이메일을 입력해주세요.');
     isValid = false;
   } else if (!isValidEmail(emailInput.value.trim())) {
-    showError(emailInput, emailError, '올바른 이메일 형식을 입력해주세요.');
+    showError(
+      emailInput,
+      emailError,
+      '올바른 이메일 형식을 입력해주세요.'
+    );
     isValid = false;
   } else {
     clearError(emailInput, emailError);
   }
 
   if (messageInput.value.trim() === '') {
-    showError(messageInput, messageError, '메시지를 입력해주세요.');
+    showError(
+      messageInput,
+      messageError,
+      '메시지를 입력해주세요.'
+    );
     isValid = false;
   } else {
     clearError(messageInput, messageError);
   }
 
-  if (isValid) {
-    formSuccess.textContent = '메시지가 정상적으로 확인되었습니다.';
+  if (!isValid) {
+    return;
+  }
+
+  const formData = new FormData(contactForm);
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error('메시지 전송에 실패했습니다.');
+    }
+
+    formSuccess.textContent =
+      '메시지가 성공적으로 전송되었습니다.';
+
     contactForm.reset();
+
+  } catch (error) {
+    formSuccess.textContent =
+      '메시지를 전송할 수 없습니다. 잠시 후 다시 시도해주세요.';
   }
 });
+
 nameInput.addEventListener('input', () => {
   clearError(nameInput, nameError);
 });

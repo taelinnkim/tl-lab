@@ -17,6 +17,16 @@
   --border-color: #3b3e39;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg-color: #181a17;
+    --text-color: #f1f0ea;
+    --accent-color: #9caf9a;
+    --card-color: #232620;
+    --border-color: #3b3e39;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
